@@ -72,3 +72,11 @@ A promessa da marca “UMA VISÃO QUE VAI ALÉM DO PALCO” passa a ser o títul
 - Canvas pausa fora da região visível e ao ocultar a aba, retomando sem saltos ao retornar.
 - Botão Orçamento no cabeçalho do celular e tablet e Solicitar orçamento no desktop, com área de toque de pelo menos 44 px. Leva diretamente ao formulário, com foco e identificação do destino, funcionando sem depender de JavaScript.
 - Verificado em Chromium em dez larguras de 320 a 1920 px: botão visível, sem colisões no cabeçalho ou transbordamento. Testados acesso direto, foco, menu, mensagem WhatsApp sem envio real, pausa e retomada do globo, novas visitas e preferência de movimento reduzido. Sem erros de JavaScript.
+
+## Introdução com profundidade na rolagem
+
+- Globo e textura crescem juntos na abertura, centralizados, e recuam até a composição anterior conforme a página rola. O efeito se reverte ao voltar ao topo, sem alterar o desenho da esfera, a arte do logo ou a velocidade de rotação.
+- Rolagem nativa, sem bloqueio ou captura de gestos; conteúdo aparece depois do recuo. Identificação da banda permanece visível na introdução, sem duplicação para leitores de tela.
+- Botão Orçamento continua funcionando diretamente para o formulário, com foco no destino. A navegação por teclado também revela o conteúdo sem obstáculos.
+- Movimento reduzido e telas muito baixas usam a apresentação convencional. Efeito calculado em quadros de animação a partir da rolagem, com medidas recalculadas ao redimensionar e carregar as fontes.
+- Verificado em Chromium: abertura, recuo e retorno nas versões mobile e desktop; rotação preservada; oito dimensões de 320 a 1920 px sem transbordamento; paisagem curta sem efeito; acesso ao formulário e movimento reduzido corretos; sem erros de JavaScript.

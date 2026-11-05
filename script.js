@@ -224,4 +224,103 @@ function initScrollReveals() {
 initScrollReveals();
 window.addEventListener('pageshow', event => { if (event.persisted) initScrollReveals(); });
 motion.addEventListener('change', initScrollReveals);
+// Reversible depth introduction. Normal document scrolling drives a reversible
+// transform on a shell; the approved canvas, wordmark and texture stay together.
+(function initDepthIntroduction() {
+  const hero = document.getElementById('inicio');
+  const inner = hero.querySelector('.hero-inner');
+  const globe = hero.querySelector('.sphere-wrap');
+  const copy = hero.querySelector('.hero-copy');
+  const hint = hero.querySelector('.scroll-indicator');
+  const pin = document.createElement('div');
+  pin.className = 'depth-pin';
+  while (hero.firstChild) pin.append(hero.firstChild);
+  hero.append(pin);
+  const shell = document.createElement('div');
+  shell.className = 'globe-depth-shell';
+  globe.before(shell); shell.append(globe);
+  const band = copy.querySelector('.eyebrow').cloneNode(true);
+  band.classList.add('depth-band');
+  band.setAttribute('aria-hidden', 'true');
+  pin.append(band);
+  let metrics = null, queued = false, lastProgress = -1, enabled = false;
+  const clamp = value => Math.max(0, Math.min(1, value));
+  const smooth = value => value * value * (3 - 2 * value);
+  function render(force = false) {
+    queued = false;
+    if (!enabled || !metrics) return;
+    const p = clamp((window.scrollY - metrics.top) / metrics.travel);
+    if (!force && Math.abs(p - lastProgress) < .0001) return;
+    lastProgress = p;
+    const retreat = 1 - smooth(p);
+    const copyVisible = smooth(clamp((p - .68) / .3));
+    shell.style.setProperty('--depth-x', `${metrics.dx * retreat}px`);
+    shell.style.setProperty('--depth-y', `${metrics.dy * retreat}px`);
+    shell.style.setProperty('--depth-scale', String(1 + (metrics.scale - 1) * retreat));
+    copy.style.setProperty('--depth-copy-opacity', String(copyVisible));
+    copy.style.setProperty('--depth-copy-shift', `${26 * (1-copyVisible)}px`);
+    copy.style.pointerEvents = copyVisible > .8 ? '' : 'none';
+    band.style.opacity = String(1 - smooth(clamp((p - .12) / .32)));
+    hint.style.opacity = String(1 - smooth(clamp((p - .08) / .3)));
+  }
+  function requestRender() {
+    if (!queued && enabled) { queued = true; requestAnimationFrame(() => render()); }
+  }
+  function measure() {
+    hero.classList.add('depth-measuring');
+    // svh stays stable when mobile browser toolbars open and close.
+    const viewport = parseFloat(getComputedStyle(pin).minHeight) || window.innerHeight;
+    enabled = !motion.matches && viewport >= 560;
+    hero.classList.toggle('depth-mode', enabled);
+    if (!enabled) {
+      metrics = null;
+      copy.style.pointerEvents = '';
+      hint.style.opacity = '';
+      hero.style.removeProperty('--depth-total-height');
+      hero.classList.remove('depth-measuring');
+      return;
+    }
+    // Measure the shell without its own transform; restore it before paint.
+    shell.style.transform = 'none';
+    const rect = shell.getBoundingClientRect();
+    const pinRect = pin.getBoundingClientRect();
+    const headerHeight = document.querySelector('.header').getBoundingClientRect().height;
+    const diameter = Math.max(180, Math.min(innerWidth * .94, viewport * .82, viewport-headerHeight-130));
+    const centerY = Math.min(Math.max(viewport*.46, headerHeight+diameter/2+16), viewport-diameter/2-116);
+    const travel = Math.round(viewport * .8);
+    metrics = {
+      top: hero.getBoundingClientRect().top + scrollY,
+      travel,
+      dx: innerWidth/2 - (rect.left + rect.width/2),
+      dy: centerY - (rect.top-pinRect.top + rect.height/2),
+      scale: diameter / (rect.width * (668/900))
+    };
+    hero.style.setProperty('--depth-total-height', `${inner.offsetHeight + travel}px`);
+    hero.style.setProperty('--depth-viewport-height', `${viewport}px`);
+    band.style.top = `${centerY + diameter/2 + 25}px`;
+    shell.style.transform = '';
+    hero.classList.remove('depth-measuring');
+    lastProgress = -1;
+    render(true);
+  }
+  let measureQueued = false;
+  function requestMeasure() {
+    if (measureQueued) return;
+    measureQueued = true;
+    requestAnimationFrame(() => { measureQueued = false; measure(); });
+  }
+  window.addEventListener('scroll', requestRender, {passive:true});
+  window.addEventListener('resize', requestMeasure, {passive:true});
+  window.addEventListener('pageshow', requestMeasure);
+  motion.addEventListener('change', requestMeasure);
+  copy.addEventListener('focusin', () => {
+    if (enabled && metrics && lastProgress < .98) {
+      window.scrollTo({top:metrics.top+metrics.travel, behavior:'instant'});
+      render(true);
+    }
+  });
+  measure();
+  if (document.fonts) document.fonts.ready.then(requestMeasure);
+})();
+
 })();
