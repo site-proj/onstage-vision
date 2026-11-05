@@ -214,3 +214,8 @@ footer .footer-brand{font-size:23px}footer a:not(.footer-brand){font-size:13px}f
 .depth-mode .scroll-indicator{top:calc(var(--depth-viewport-height) - 58px);bottom:auto;transition:none}
 @media(max-width:900px){.globe-depth-shell{order:0;width:min(100%,460px);flex:none}}
 @media(prefers-reduced-motion:reduce){.depth-band{display:none!important}.depth-mode .globe-depth-shell{transform:none;will-change:auto}}
+
+/* Larger band identification and the expanded service area. */
+.eyebrow-main,.depth-mode .depth-band .eyebrow-main{font-size:20px;line-height:1.4;font-weight:700}
+.eyebrow-label{min-width:0;flex-wrap:wrap}
+.eyebrow-place{max-width:100%;white-space:normal}
