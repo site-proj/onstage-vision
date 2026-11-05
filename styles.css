@@ -81,3 +81,8 @@ footer{padding-inline:20px}footer .footer-brand{font-size:20px}footer a:not(.foo
 .sphere-halo{background:radial-gradient(circle at 25% 18%,#ffffff0c,transparent 55%);box-shadow:inset -32px -25px 40px #0009,inset 11px 5px 23px #ffffff12,0 0 60px #ffffff08}
 @media(max-width:900px){.hero h1{font-size:clamp(40px,8.2vw,68px)}.section-heading h2,.contact h2{font-size:clamp(40px,7.5vw,64px)}.about h2{font-size:clamp(58px,11vw,88px)}.exp-card h3{font-size:38px}}
 @media(max-width:420px){.hero h1{font-size:clamp(34px,9.2vw,39px)}.section-heading h2,.contact h2{font-size:clamp(38px,10.5vw,44px)}.about h2{font-size:clamp(52px,14vw,60px)}}
+
+/* Globe composition supplied by the user: no outer orbit or atmospheric halo. */
+.sphere-wrap{filter:none}
+.sphere-halo,.sphere-wrap .floor-glow{display:none}
+.sphere-wordmark{width:64%;transform:translateY(24%);filter:none}

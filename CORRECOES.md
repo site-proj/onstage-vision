@@ -37,3 +37,9 @@ Este pacote está pronto para substituir os arquivos da V2 na hospedagem existen
 - Malha com eixo inclinado e transição suave na área da marca.
 - Paleta neutralizada para preto, grafite e prata, conforme solicitado.
 - Tipografia grotesca condensada nos títulos e grotesca geométrica nos textos.
+
+## Referência final do globo
+
+Substituída a composição orbital pela referência enviada: esfera preta, curvas prateadas com perspectiva, fonte de luz acima da marca e feixe no quadrante superior direito. Órbita externa, halo e brilho no piso removidos do globo. A malha mantém rotação contínua de 28 segundos, com a marca voltada para leitura e alternativa estática para movimento reduzido. Não é uma imagem estática: a composição foi reproduzida em Canvas, mantendo a marca extraída da arte da V2.
+
+Verificada em Chromium nas 11 larguras de 320 a 1920 px: sem transbordamento ou sobreposição, sem erros de JavaScript, menu e formulário funcionais.
