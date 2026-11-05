@@ -109,4 +109,23 @@ motion.addEventListener('change', resume);
 document.addEventListener('visibilitychange', resume);
 resume();
 
+
+// Reveal cards once as they enter the viewport, with a small row stagger.
+if ('IntersectionObserver' in window && !motion.matches) {
+  const targets = document.querySelectorAll('.exp-card, .media-panel, .quote-form, .genre-cloud span, .stat-row > div');
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    }
+  }, {threshold:.08, rootMargin:'0px 0px -24px 0px'});
+  targets.forEach((target, index) => {
+    target.setAttribute('data-reveal', '');
+    target.style.setProperty('--reveal-delay', `${(index % 3) * 80}ms`);
+    observer.observe(target);
+  });
+  document.documentElement.classList.add('reveal-ready');
+}
 })();

@@ -43,3 +43,7 @@ Este pacote está pronto para substituir os arquivos da V2 na hospedagem existen
 Substituída a composição orbital pela referência enviada: esfera preta, curvas prateadas com perspectiva, fonte de luz acima da marca e feixe no quadrante superior direito. Órbita externa, halo e brilho no piso removidos do globo. A malha mantém rotação contínua de 28 segundos, com a marca voltada para leitura e alternativa estática para movimento reduzido. Não é uma imagem estática: a composição foi reproduzida em Canvas, mantendo a marca extraída da arte da V2.
 
 Verificada em Chromium nas 11 larguras de 320 a 1920 px: sem transbordamento ou sobreposição, sem erros de JavaScript, menu e formulário funcionais.
+
+## Destaque e movimento na navegação
+
+A promessa da marca “UMA VISÃO QUE VAI ALÉM DO PALCO” passa a ser o título principal, sem subtítulo duplicado. Textura monocromática discreta atrás da esfera e entrada dos cards, estilos, indicadores e formulário ao entrar na tela. Animações executadas uma vez, com intervalos suaves e respeito ao movimento reduzido. Conteúdo visível sem JavaScript. Verificação em Chromium: sete larguras entre 320 e 1920 px, sem transbordamento, entrada visível após rolagem e sem erros de JavaScript.
