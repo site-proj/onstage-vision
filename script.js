@@ -64,7 +64,7 @@ const gridCtx = grid.getContext('2d');
 const motion = matchMedia('(prefers-reduced-motion: reduce)');
 const TAU = Math.PI * 2, cx = 450, cy = 450, radius = 334;
 const axis = -.2;
-let frame = 0, rotation = 0, last = null;
+let frame = 0, rotation = 0, last = null, globeOnscreen = true;
 
 function project(lat, lon) {
   const cl = Math.cos(lat), x = cl * Math.sin(lon + rotation);
@@ -154,39 +154,72 @@ function draw(t) {
   ctx.strokeStyle = 'rgba(190,190,190,.18)'; ctx.lineWidth = 1;
   ctx.beginPath(); ctx.arc(cx, cy, radius-4, 0, TAU); ctx.stroke();
   drawLight();
-  if (!motion.matches && !document.hidden) frame = requestAnimationFrame(draw);
+  if (!motion.matches && !document.hidden && globeOnscreen) frame = requestAnimationFrame(draw);
 }
 function resume() {
   cancelAnimationFrame(frame); last = null;
-  if (!document.hidden) frame = requestAnimationFrame(draw);
+  if (!document.hidden && globeOnscreen) frame = requestAnimationFrame(draw);
 }
 motion.addEventListener('change', resume);
 document.addEventListener('visibilitychange', resume);
 resume();
+// Suspend the canvas when visitors are reading lower sections on mobile.
+if ('IntersectionObserver' in window) {
+  const globeVisibility = new IntersectionObserver(entries => {
+    const visible = entries[0].isIntersecting;
+    if (visible !== globeOnscreen) { globeOnscreen = visible; resume(); }
+  }, {rootMargin:'160px 0px'});
+  globeVisibility.observe(canvas);
+}
 
-
-// Replay entrance effects for each page visit, including restored browser pages.
-let revealObserver;
+// A scene starts with its heading, followed by copy and staggered cards.
+// Keep the published wording and tags intact while exposing each heading line.
+let revealObserver, sceneObserver;
+const previewSections = [...document.querySelectorAll('main > section')];
+const revealSelector = '.exp-card, .media-panel, .quote-form, .genre-cloud span, .stat-row > div, .section-heading > p, .about-layout > div > p, .contact-copy > p';
+function splitHeadingLines() {
+  document.querySelectorAll('.hero h1, main > section h2').forEach(heading => {
+    if (heading.dataset.motionSplit) return;
+    heading.querySelectorAll('span').forEach(span => span.classList.add('original-heading-span'));
+    const lines = heading.innerHTML.split(/<br\s*\/?>/i);
+    heading.innerHTML = lines.map((line, i) => `<span class="motion-line"><span class="motion-line-inner" style="--line-index:${i}">${line}</span></span>`).join('');
+    heading.dataset.motionSplit = 'true';
+  });
+}
 function initScrollReveals() {
-  revealObserver?.disconnect();
-  const targets = document.querySelectorAll('.exp-card, .media-panel, .quote-form, .genre-cloud span, .stat-row > div');
-  document.documentElement.classList.remove('reveal-ready');
+  revealObserver?.disconnect(); sceneObserver?.disconnect();
+  const targets = [...document.querySelectorAll(revealSelector)];
+  document.documentElement.classList.remove('reveal-ready', 'scene-ready');
   targets.forEach(target => target.classList.remove('is-visible'));
+  previewSections.forEach(section => section.classList.remove('scene-active'));
   if (!('IntersectionObserver' in window) || motion.matches) return;
+  splitHeadingLines();
+  sceneObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('scene-active');
+      sceneObserver.unobserve(entry.target);
+    });
+  }, {threshold:0, rootMargin:'0px 0px -12% 0px'});
+  previewSections.forEach(section => sceneObserver.observe(section));
   revealObserver = new IntersectionObserver(entries => {
-    for (const entry of entries) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        revealObserver.unobserve(entry.target);
-      }
-    }
-  }, {threshold:.08, rootMargin:'0px 0px -24px 0px'});
-  targets.forEach((target, index) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      revealObserver.unobserve(entry.target);
+    });
+  }, {threshold:.12, rootMargin:'0px 0px -5% 0px'});
+  targets.forEach(target => {
     target.setAttribute('data-reveal', '');
-    target.style.setProperty('--reveal-delay', `${(index % 3) * 80}ms`);
+    const parent = target.parentElement;
+    const siblings = [...parent.children].filter(node => node.matches(revealSelector));
+    const index = Math.max(0, siblings.indexOf(target));
+    const kind = target.matches('.exp-card') ? 'card' : target.matches('.media-panel,.quote-form') ? 'panel' : 'copy';
+    target.dataset.revealKind = kind;
+    target.style.setProperty('--reveal-delay', `${Math.min(index * 140, 420)}ms`);
     revealObserver.observe(target);
   });
-  document.documentElement.classList.add('reveal-ready');
+  document.documentElement.classList.add('reveal-ready', 'scene-ready');
 }
 initScrollReveals();
 window.addEventListener('pageshow', event => { if (event.persisted) initScrollReveals(); });

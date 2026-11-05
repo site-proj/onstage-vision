@@ -63,3 +63,12 @@ A promessa da marca “UMA VISÃO QUE VAI ALÉM DO PALCO” passa a ser o títul
 - Textos de apoio em Space Grotesk com tamanhos de 13 a 18 px, navegação maior, títulos do formulário em fonte aberta e contraste ampliado. Notas, legendas e textos legais antes com 8 a 12 px foram ampliados.
 - Campos com 16 px, botões com 16 px, notas do formulário com 14 px e corpo das seções com 18 px. Formato mobile do painel de mídia ajustado para evitar colisão das legendas com o controle de reprodução.
 - Verificação em Chromium: oito larguras de 320 a 1920 px sem transbordamento, sem colisão no menu e no painel de mídia. Fluxos de WhatsApp, quatro mensagens personalizadas, cópia, novas visitas e movimento reduzido passaram sem erros de JavaScript.
+
+## Movimento e acesso ao orçamento
+
+- Textura de relevos acústicos centralizada na mesma origem da esfera; nova arte original em WebP. Sem alteração das palavras e da arte do logo.
+- BANDA AO VIVO com 17 px e localização em segunda linha no celular.
+- Entrada inicial coordenada da esfera e dos textos; títulos das seções aparecem por linhas, seguidos por textos e cards com perspectiva suave, foco gradual e intervalos entre elementos. Efeitos executados uma vez por visita e reiniciados na restauração da página, com movimento reduzido respeitado.
+- Canvas pausa fora da região visível e ao ocultar a aba, retomando sem saltos ao retornar.
+- Botão Orçamento no cabeçalho do celular e tablet e Solicitar orçamento no desktop, com área de toque de pelo menos 44 px. Leva diretamente ao formulário, com foco e identificação do destino, funcionando sem depender de JavaScript.
+- Verificado em Chromium em dez larguras de 320 a 1920 px: botão visível, sem colisões no cabeçalho ou transbordamento. Testados acesso direto, foco, menu, mensagem WhatsApp sem envio real, pausa e retomada do globo, novas visitas e preferência de movimento reduzido. Sem erros de JavaScript.
