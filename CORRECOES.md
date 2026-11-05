@@ -55,3 +55,11 @@ A promessa da marca “UMA VISÃO QUE VAI ALÉM DO PALCO” passa a ser o títul
 - Animações de entrada reiniciam a cada visita à página, inclusive quando ela é restaurada pelo navegador. Executam uma vez por elemento durante a navegação, sem guardar bloqueios de animação em armazenamento local. Movimento reduzido respeitado.
 - Abertura identifica explicitamente a Onstage Vision como banda ao vivo e descreve os eventos atendidos.
 - Verificação no Chromium em desktop e mobile: quatro tipos de mensagem, telefone, caracteres especiais, datas opcionais, validação de nome, botão de cópia, alternativa de abertura, novas visitas/restauração e movimento reduzido. WhatsApp interceptado nos testes, sem envio de mensagens reais. Sem transbordamento de 320 a 1440 px e sem erros de JavaScript.
+
+## Textura fluida e legibilidade
+
+- Fundo original em grafite acetinado e prata, com curvas amplas e centro escuro; substitui a textura de ruído e as hachuras. Imagem própria em WebP (aprox. 21 KB). Globo, logo, animação e estrutura das seções preservados.
+- Referências de direção: Silver Sky Abstract Backgrounds (https://www.behance.net/gallery/188857631/Silver-Sky-Abstract-Backgrounds) e UX/UI Dj website design (https://www.behance.net/gallery/242913303/UXUI-Dj-website-design). Os assets desses projetos não foram incorporados.
+- Textos de apoio em Space Grotesk com tamanhos de 13 a 18 px, navegação maior, títulos do formulário em fonte aberta e contraste ampliado. Notas, legendas e textos legais antes com 8 a 12 px foram ampliados.
+- Campos com 16 px, botões com 16 px, notas do formulário com 14 px e corpo das seções com 18 px. Formato mobile do painel de mídia ajustado para evitar colisão das legendas com o controle de reprodução.
+- Verificação em Chromium: oito larguras de 320 a 1920 px sem transbordamento, sem colisão no menu e no painel de mídia. Fluxos de WhatsApp, quatro mensagens personalizadas, cópia, novas visitas e movimento reduzido passaram sem erros de JavaScript.
