@@ -91,10 +91,15 @@ footer{padding-inline:20px}footer .footer-brand{font-size:20px}footer a:not(.foo
 .hero-actions{margin-top:32px}
 
 /* Fine monochrome grain and diagonal threads sit behind the reference globe. */
-.sphere-wrap::before{content:'';position:absolute;inset:-10%;z-index:0;pointer-events:none;background-image:repeating-linear-gradient(115deg,#ffffff0b 0 1px,transparent 1px 7px),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.76' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.3'/%3E%3C/svg%3E");background-size:auto,180px 180px;opacity:.48;mask-image:radial-gradient(ellipse,#000 35%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse,#000 35%,transparent 70%)}
+.sphere-wrap::before{content:'';position:absolute;inset:-18%;z-index:0;pointer-events:none;background-image:repeating-linear-gradient(115deg,#ffffff17 0 1px,transparent 1px 7px),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.76' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23grain)' opacity='.55'/%3E%3C/svg%3E");background-size:auto,180px 180px;opacity:.68;mask-image:radial-gradient(ellipse,#000 35%,#000b 52%,transparent 74%);-webkit-mask-image:radial-gradient(ellipse,#000 35%,#000b 52%,transparent 74%)}
 /* Content remains visible without JavaScript and when reduced motion is requested. */
 @media(prefers-reduced-motion:no-preference){
 .reveal-ready [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.65,.3,1),border-color .3s;transition-delay:var(--reveal-delay,0ms)}
 .reveal-ready [data-reveal].is-visible,.reveal-ready [data-reveal]:focus-within{opacity:1;transform:none}
 .reveal-ready .exp-card.is-visible:hover{transform:translateY(-6px);transition-delay:0ms}
 }
+
+.form-result textarea{font-size:13px;line-height:1.6}.form-result .copy-btn{margin-top:12px}
+
+.hero-copy>p{max-width:36em;font-size:clamp(17px,1.45vw,21px);line-height:1.55;margin:22px 0 0;color:#bdbdbd}
+@media(max-width:900px){.hero-copy>p{max-width:34em;margin:20px auto 0;font-size:17px}}

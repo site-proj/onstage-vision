@@ -18,7 +18,7 @@ Abra `index.html` no navegador. Opcionalmente use Live Server ou `python -m http
 - Confirmar o repertório e os estilos de fato oferecidos.
 - Substituir os fundos conceituais por fotos autorizadas da banda quando disponíveis.
 - Enviar os vídeos oficiais da banda e habilitar apresentação.
-- Confirmar o WhatsApp comercial para integrar o formulário diretamente à conversa. Por enquanto, o formulário prepara uma mensagem copiável.
+- Formulário integrado ao WhatsApp +55 (13) 99181-1006, com mensagem personalizada por tipo de evento. O visitante confirma o envio no WhatsApp.
 - Confirmar domínio, endereço de e-mail e textos institucionais.
 
 ## Ajustes

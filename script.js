@@ -1,4 +1,59 @@
-(()=>{'use strict';const menuButton=document.getElementById('menuButton'),menu=document.getElementById('menu');menuButton.addEventListener('click',()=>{const open=menu.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Fechar menu':'Abrir menu')});menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Abrir menu')}));document.getElementById('year').textContent=new Date().getFullYear();const date=document.getElementById('date');date.min=new Date().toISOString().slice(0,10);const form=document.getElementById('quoteForm'),result=document.getElementById('formResult'),msg=document.getElementById('preparedMessage');form.addEventListener('submit',e=>{e.preventDefault();const data=new FormData(form);let d=String(data.get('date')||'');if(d){const p=d.split('-');d=`${p[2]}/${p[1]}/${p[0]}`}msg.value=`Olá, equipe Onstage Vision! Quero conversar sobre um orçamento.\n\nNome: ${data.get('name')}\nEvento: ${data.get('type')}\nData: ${d||'A definir'}\nCidade: ${data.get('city')||'A definir'}\nDetalhes: ${data.get('details')||'A definir'}`;result.hidden=false;result.scrollIntoView({behavior:'smooth',block:'nearest'})});document.getElementById('copyMessage').addEventListener('click',async e=>{try{await navigator.clipboard.writeText(msg.value);e.currentTarget.textContent='Mensagem copiada ✓'}catch{msg.focus();msg.select();e.currentTarget.textContent='Selecione e copie o texto'}});
+(()=>{'use strict';const menuButton=document.getElementById('menuButton'),menu=document.getElementById('menu');menuButton.addEventListener('click',()=>{const open=menu.classList.toggle('open');menuButton.setAttribute('aria-expanded',String(open));menuButton.setAttribute('aria-label',open?'Fechar menu':'Abrir menu')});menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.classList.remove('open');menuButton.setAttribute('aria-expanded','false');menuButton.setAttribute('aria-label','Abrir menu')}));document.getElementById('year').textContent=new Date().getFullYear();// WhatsApp receives a prefilled message; the visitor confirms sending it.
+const date = document.getElementById('date');
+const today = new Date();
+date.min = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+const form = document.getElementById('quoteForm');
+const result = document.getElementById('formResult');
+const msg = document.getElementById('preparedMessage');
+const whatsappLink = document.getElementById('whatsappLink');
+const nameInput = document.getElementById('name');
+nameInput.addEventListener('input', () => nameInput.setCustomValidity(''));
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const data = new FormData(form);
+  const read = key => String(data.get(key) || '').trim();
+  const name = read('name');
+  if (!name) {
+    nameInput.setCustomValidity('Informe seu nome para preparar o orçamento.');
+    nameInput.reportValidity();
+    return;
+  }
+  const type = read('type');
+  const intros = {
+    'Casamento': 'Queremos uma trilha sonora especial para o nosso casamento e gostaríamos de conhecer as propostas da banda.',
+    'Festa / Aniversário': 'Quero levar música ao vivo e muita energia para minha festa e gostaria de receber uma proposta.',
+    'Evento corporativo': 'Estou organizando um evento corporativo e gostaria de uma proposta de música ao vivo para essa ocasião.',
+    'Outro': 'Estou planejando um evento e gostaria de conhecer os formatos de show e receber uma proposta personalizada.'
+  };
+  const rawDate = read('date');
+  const eventDate = rawDate ? rawDate.split('-').reverse().join('/') : 'A definir';
+  msg.value = [
+    'Olá, equipe Onstage Vision! Conheci a banda pelo site.',
+    '', intros[type] || intros.Outro, '',
+    '*INFORMAÇÕES DO EVENTO*',
+    `*Nome:* ${name}`,
+    `*Tipo de evento:* ${type}`,
+    `*Data prevista:* ${eventDate}`,
+    `*Cidade:* ${read('city') || 'A definir'}`,
+    `*Mais detalhes:* ${read('details') || 'Gostaria de conversar para definir os detalhes.'}`,
+    '',
+    rawDate ? 'Podem verificar a disponibilidade para essa data e me ajudar com as opções de formação, repertório e orçamento?' : 'Podem me ajudar a escolher o formato de show, o repertório e as opções de orçamento?'
+  ].join('\n');
+  whatsappLink.href = `https://wa.me/5513991811006?text=${encodeURIComponent(msg.value)}`;
+  result.hidden = false;
+  document.getElementById('copyMessage').textContent = 'Copiar mensagem';
+  whatsappLink.click();
+});
+document.getElementById('copyMessage').addEventListener('click', async event => {
+  const button = event.currentTarget;
+  try {
+    await navigator.clipboard.writeText(msg.value);
+    button.textContent = 'Mensagem copiada ✓';
+  } catch {
+    msg.focus(); msg.select();
+    button.textContent = 'Selecione e copie o texto';
+  }
+});
 // Reference globe: black sphere, silver graticule, stationary wordmark and
 // an upper-right sweep of light. Only the spherical mesh rotates.
 const canvas = document.getElementById('globe');
@@ -110,22 +165,30 @@ document.addEventListener('visibilitychange', resume);
 resume();
 
 
-// Reveal cards once as they enter the viewport, with a small row stagger.
-if ('IntersectionObserver' in window && !motion.matches) {
+// Replay entrance effects for each page visit, including restored browser pages.
+let revealObserver;
+function initScrollReveals() {
+  revealObserver?.disconnect();
   const targets = document.querySelectorAll('.exp-card, .media-panel, .quote-form, .genre-cloud span, .stat-row > div');
-  const observer = new IntersectionObserver(entries => {
+  document.documentElement.classList.remove('reveal-ready');
+  targets.forEach(target => target.classList.remove('is-visible'));
+  if (!('IntersectionObserver' in window) || motion.matches) return;
+  revealObserver = new IntersectionObserver(entries => {
     for (const entry of entries) {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
+        revealObserver.unobserve(entry.target);
       }
     }
   }, {threshold:.08, rootMargin:'0px 0px -24px 0px'});
   targets.forEach((target, index) => {
     target.setAttribute('data-reveal', '');
     target.style.setProperty('--reveal-delay', `${(index % 3) * 80}ms`);
-    observer.observe(target);
+    revealObserver.observe(target);
   });
   document.documentElement.classList.add('reveal-ready');
 }
+initScrollReveals();
+window.addEventListener('pageshow', event => { if (event.persisted) initScrollReveals(); });
+motion.addEventListener('change', initScrollReveals);
 })();

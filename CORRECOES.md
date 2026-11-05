@@ -47,3 +47,11 @@ Verificada em Chromium nas 11 larguras de 320 a 1920 px: sem transbordamento ou 
 ## Destaque e movimento na navegação
 
 A promessa da marca “UMA VISÃO QUE VAI ALÉM DO PALCO” passa a ser o título principal, sem subtítulo duplicado. Textura monocromática discreta atrás da esfera e entrada dos cards, estilos, indicadores e formulário ao entrar na tela. Animações executadas uma vez, com intervalos suaves e respeito ao movimento reduzido. Conteúdo visível sem JavaScript. Verificação em Chromium: sete larguras entre 320 e 1920 px, sem transbordamento, entrada visível após rolagem e sem erros de JavaScript.
+
+## Contato, textura e novas visitas
+
+- Formulário abre o WhatsApp 5513991811006 em uma nova aba com mensagem adaptada a casamento, festa, evento corporativo ou outro. Inclui nome, tipo, data, cidade e detalhes. Campos opcionais vazios ficam a definir. O visitante confirma o envio no WhatsApp; não há envio automático pelo site. Link visível e cópia do texto oferecem uma alternativa caso a abertura não ocorra.
+- Textura monocromática reforçada atrás da esfera.
+- Animações de entrada reiniciam a cada visita à página, inclusive quando ela é restaurada pelo navegador. Executam uma vez por elemento durante a navegação, sem guardar bloqueios de animação em armazenamento local. Movimento reduzido respeitado.
+- Abertura identifica explicitamente a Onstage Vision como banda ao vivo e descreve os eventos atendidos.
+- Verificação no Chromium em desktop e mobile: quatro tipos de mensagem, telefone, caracteres especiais, datas opcionais, validação de nome, botão de cópia, alternativa de abertura, novas visitas/restauração e movimento reduzido. WhatsApp interceptado nos testes, sem envio de mensagens reais. Sem transbordamento de 320 a 1440 px e sem erros de JavaScript.
