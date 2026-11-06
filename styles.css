@@ -290,3 +290,17 @@ html{scroll-padding-bottom:88px}
 .exp-card.is-visible .music-bars i:nth-child(2){animation-delay:.12s}.exp-card.is-visible .music-bars i:nth-child(3){animation-delay:.22s}
 }
 @keyframes music-cue-beat{0%,100%{transform:scaleY(1)}35%{transform:scaleY(.4)}70%{transform:scaleY(.8)}}
+
+/* Highlight the two existing Instagram links without adding new placements. */
+.instagram-action{display:flex;align-items:center;gap:18px;width:100%;min-height:80px;margin-top:28px;padding:20px 24px;border:1px solid #dadada;border-radius:7px;background:#f3f3f1;color:#0b0b0b;box-shadow:0 10px 30px #00000015;transition:background .25s ease,box-shadow .25s ease}
+.instagram-icon{display:block;width:34px;height:34px;flex-shrink:0}
+.instagram-action-copy{display:grid;gap:4px;min-width:0}
+.instagram-action-copy strong{font-family:'Space Grotesk',Arial,sans-serif;font-size:clamp(18px,1.6vw,23px);font-weight:600;line-height:1.35;letter-spacing:-.025em}
+.instagram-action-copy>span{font-size:15px;font-weight:500;line-height:1.4;letter-spacing:0;color:#444}
+.instagram-action-arrow{font-size:27px;line-height:1;margin-left:auto;flex-shrink:0}
+.instagram-action:hover{background:#fff;box-shadow:0 12px 35px #0003}
+.instagram-action-contact{max-width:390px;margin-top:0;background:#101010;color:#f4f4f4;border-color:#101010}
+.instagram-action-contact .instagram-action-copy>span{color:#c8c8c8}
+.instagram-action-contact:hover{background:#242424}
+@media(max-width:900px){.instagram-action{padding:18px 20px;gap:14px;min-height:78px}.instagram-icon{width:30px;height:30px}.instagram-action-copy strong{font-size:19px}}
+@media(max-width:420px){.instagram-action{padding:17px 18px;gap:12px}.instagram-icon{width:28px;height:28px}.instagram-action-copy strong{font-size:18px}.instagram-action-arrow{font-size:24px}}

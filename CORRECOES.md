@@ -90,3 +90,9 @@ A promessa da marca “UMA VISÃO QUE VAI ALÉM DO PALCO” passa a ser o títul
 - Composição variada no repertório e no painel de mídia. Conheça a banda leva à apresentação, mantendo o bloco de mídia como conteúdo em produção enquanto não há vídeo real.
 - Botão discreto de orçamento durante a navegação mobile, oculto na abertura e ao chegar ao formulário ou rodapé.
 - Textos existentes e SVGs dos logos preservados. Verificação em Chromium de 320 a 1920 px sem transbordamento ou textos cortados; cards selecionam corretamente os três tipos de evento, formulário e WhatsApp mantidos, sem envio real nos testes e sem erros de JavaScript.
+
+## Destaque do Instagram
+
+Os dois links existentes em Bastidores e Contato foram transformados em botões com ícone do Instagram, título Instagram da banda e o perfil @onstagevision. Mantidos os mesmos lugares da página e o mesmo endereço; sem novos atalhos ou mudanças na abertura, nos cards ou no orçamento. Botão claro na seção escura e escuro na seção clara, com área de toque ampla e rótulo acessível.
+
+Verificados em Chromium de 320 a 1440 px sem cortes ou transbordamento; ambos abrem https://www.instagram.com/onstagevision/ em nova aba, com isolamento da aba de origem. Sem erros de JavaScript.
