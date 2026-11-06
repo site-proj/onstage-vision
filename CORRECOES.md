@@ -80,3 +80,13 @@ A promessa da marca “UMA VISÃO QUE VAI ALÉM DO PALCO” passa a ser o títul
 - Botão Orçamento continua funcionando diretamente para o formulário, com foco no destino. A navegação por teclado também revela o conteúdo sem obstáculos.
 - Movimento reduzido e telas muito baixas usam a apresentação convencional. Efeito calculado em quadros de animação a partir da rolagem, com medidas recalculadas ao redimensionar e carregar as fontes.
 - Verificado em Chromium: abertura, recuo e retorno nas versões mobile e desktop; rotação preservada; oito dimensões de 320 a 1920 px sem transbordamento; paisagem curta sem efeito; acesso ao formulário e movimento reduzido corretos; sem erros de JavaScript.
+
+## Experiência editorial e identificação musical
+
+- Cards com ambientes de evento conceituais em preto e branco, uma composição para cada experiência. São ilustrações geradas e não registros de apresentações da banda.
+- Selo BANDA AO VIVO em cada card, com três barras de som; movimento curto de entrada (duas pulsações) e depois estático, sem som e com movimento reduzido respeitado.
+- No celular, cards em faixa com navegação lateral e próximo card parcialmente visível. Cada card leva ao formulário com o tipo de evento selecionado.
+- Percurso de recuo do globo reduzido de 0,8 para 0,52 viewport, preservando o desenho, a rotação e a textura. Texto e orçamento aparecem mais cedo.
+- Composição variada no repertório e no painel de mídia. Conheça a banda leva à apresentação, mantendo o bloco de mídia como conteúdo em produção enquanto não há vídeo real.
+- Botão discreto de orçamento durante a navegação mobile, oculto na abertura e ao chegar ao formulário ou rodapé.
+- Textos existentes e SVGs dos logos preservados. Verificação em Chromium de 320 a 1920 px sem transbordamento ou textos cortados; cards selecionam corretamente os três tipos de evento, formulário e WhatsApp mantidos, sem envio real nos testes e sem erros de JavaScript.

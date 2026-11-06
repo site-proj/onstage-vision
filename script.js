@@ -206,6 +206,11 @@ function initScrollReveals() {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       entry.target.classList.add('is-visible');
+      if (entry.target.classList.contains('experience-grid')) {
+        entry.target.querySelectorAll('.exp-card').forEach(card => {
+          card.classList.add('is-visible'); revealObserver.unobserve(card);
+        });
+      }
       revealObserver.unobserve(entry.target);
     });
   }, {threshold:.12, rootMargin:'0px 0px -5% 0px'});
@@ -219,6 +224,7 @@ function initScrollReveals() {
     target.style.setProperty('--reveal-delay', `${Math.min(index * 140, 420)}ms`);
     revealObserver.observe(target);
   });
+  revealObserver.observe(document.querySelector('.experience-grid'));
   document.documentElement.classList.add('reveal-ready', 'scene-ready');
 }
 initScrollReveals();
@@ -287,7 +293,7 @@ motion.addEventListener('change', initScrollReveals);
     const headerHeight = document.querySelector('.header').getBoundingClientRect().height;
     const diameter = Math.max(180, Math.min(innerWidth * .94, viewport * .82, viewport-headerHeight-130));
     const centerY = Math.min(Math.max(viewport*.46, headerHeight+diameter/2+16), viewport-diameter/2-116);
-    const travel = Math.round(viewport * .8);
+    const travel = Math.round(viewport * .52);
     metrics = {
       top: hero.getBoundingClientRect().top + scrollY,
       travel,
@@ -323,4 +329,42 @@ motion.addEventListener('change', initScrollReveals);
   if (document.fonts) document.fonts.ready.then(requestMeasure);
 })();
 
+
+// Keep the quote action within reach after the opening, without covering the form.
+(function initMobileBudget() {
+  const link = document.querySelector('.mobile-budget');
+  if (!link || !('IntersectionObserver' in window)) return;
+  let formVisible = false, footerVisible = false, queued = false;
+  link.hidden = false;
+  function update() {
+    queued = false;
+    const active = matchMedia('(max-width:900px)').matches && scrollY > innerHeight*.6 && !formVisible && !footerVisible;
+    link.classList.toggle('is-active', active);
+    link.setAttribute('aria-hidden', String(!active));
+    link.tabIndex = active ? 0 : -1;
+  }
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.target.id === 'quoteForm') formVisible = entry.isIntersecting;
+      else footerVisible = entry.isIntersecting;
+    });
+    update();
+  }, {threshold:0});
+  observer.observe(document.getElementById('quoteForm'));
+  observer.observe(document.querySelector('footer'));
+  function requestUpdate() { if (!queued) { queued = true; requestAnimationFrame(update); } }
+  window.addEventListener('scroll', requestUpdate, {passive:true});
+  window.addEventListener('resize', requestUpdate, {passive:true});
+  window.addEventListener('pageshow', requestUpdate);
+  update();
+})();
+
+// Carry the visitor's chosen experience into the quote form.
+document.querySelectorAll('.exp-card[data-event-type]').forEach(card => {
+  card.addEventListener('click', () => {
+    const select = document.getElementById('type');
+    select.value = card.dataset.eventType;
+    select.dispatchEvent(new Event('change', {bubbles:true}));
+  });
+});
 })();

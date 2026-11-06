@@ -219,3 +219,74 @@ footer .footer-brand{font-size:23px}footer a:not(.footer-brand){font-size:13px}f
 .eyebrow-main,.depth-mode .depth-band .eyebrow-main{font-size:20px;line-height:1.4;font-weight:700}
 .eyebrow-label{min-width:0;flex-wrap:wrap}
 .eyebrow-place{max-width:100%;white-space:normal}
+
+/* Editorial concept: venue atmospheres, clear rhythm and shorter mobile journeys. */
+.experience-grid{grid-template-columns:1.08fr 1fr 1fr;gap:22px;align-items:start}
+.exp-card{height:440px;padding:28px;border-radius:5px;border-color:#ffffff40;background-image:url('assets/event-environments.webp');background-size:300% auto;background-repeat:no-repeat;isolation:isolate}
+.weddings{background-position:0 50%}.parties{background-position:50% 50%;margin-top:28px}.corporate{background-position:100% 50%}
+.exp-card::before{background:linear-gradient(180deg,#0004 0%,#0000 25%,#0003 45%,#000e 100%)}
+.exp-index{font-size:13px;letter-spacing:.06em;text-shadow:0 2px 10px #000}
+.exp-card h3{font-size:clamp(38px,3.4vw,54px);letter-spacing:-.02em;margin-bottom:10px}
+.exp-card p{font-size:16px;line-height:1.55;max-width:25ch}
+.exp-card-bottom{align-items:end;flex-wrap:nowrap;gap:16px}
+.exp-card-bottom>div{min-width:0}.round-arrow{width:44px;height:44px;background:#0003;backdrop-filter:blur(6px);flex-shrink:0}
+.about{padding-block:120px}.about-layout{gap:80px;align-items:start}
+.about-glow{inset:0 38% 0 -18%;width:auto;height:auto;background:url('assets/graphite-wave.webp') left center/cover no-repeat;opacity:.24;mask-image:linear-gradient(90deg,#000,transparent 90%)}
+.about-lead{font-size:clamp(27px,2.4vw,35px)!important;letter-spacing:-.025em;max-width:24ch!important}
+.stat-row{border-top:1px solid #ffffff30;padding-top:30px;gap:28px}
+.stat-row strong{font-size:40px;line-height:1}.stat-row small{font-size:13px;max-width:20ch}
+.repertoire .section-heading{flex-direction:row-reverse;align-items:start}
+.repertoire .section-heading>div{max-width:60%;text-align:right}
+.repertoire .section-heading>p{margin-top:55px}
+.genre-cloud{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:1px solid #ffffff35;counter-reset:genre}
+.genre-cloud span{display:flex;align-items:center;gap:16px;counter-increment:genre;border:0;border-bottom:1px solid #ffffff28;border-radius:0;padding:24px 20px 24px 0;font-size:clamp(16px,1.4vw,21px);font-weight:600;letter-spacing:-.025em}
+.genre-cloud span::before{content:counter(genre,decimal-leading-zero);font-size:13px;letter-spacing:0;color:#9b9b9b;font-weight:400}
+.genre-cloud span:hover{background:transparent;color:#fff}
+.genre-cloud span:last-child{grid-column:span 2}
+.media-panel{min-height:520px;border-radius:6px;background:linear-gradient(0deg,#000f,#0004 60%,#0008),url('assets/hero-poster.jpg') center 44%/cover no-repeat}
+.media-panel::before,.media-panel::after{display:none}
+.media-play{width:82px;height:82px;font-size:38px;background:#0007;backdrop-filter:blur(8px);opacity:.8}
+.media-caption{left:32px;right:32px;bottom:30px;gap:10px}.media-caption strong{font-size:clamp(24px,2.3vw,34px);letter-spacing:-.04em;max-width:28ch}
+.contact{padding-block:105px}.contact-copy>p{max-width:34ch}.quote-form{border-radius:7px;box-shadow:0 12px 45px #0000000c}
+.mobile-budget[hidden]{display:none!important}
+.mobile-budget{display:none}
+@media(max-width:1100px) and (min-width:901px){.exp-card{padding:22px}.exp-card-bottom{flex-wrap:wrap}.exp-card h3{font-size:38px}}
+@media(max-width:900px){
+.section-pad{padding-block:68px}
+.section-heading{margin-bottom:30px}.section-heading>p{font-size:17px;line-height:1.75;margin-top:22px}
+.experience-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x proximity;scroll-padding-inline:0;padding:4px 0 18px;margin-right:-24px;padding-right:24px;scrollbar-width:thin;scrollbar-color:#858585 #222;align-items:stretch}
+.exp-card{flex:0 0 88%;height:354px;margin:0;padding:24px;scroll-snap-align:start;scroll-margin-inline:16px}
+.exp-card h3{font-size:46px}.exp-card p{font-size:16px;max-width:22ch}
+.exp-card-bottom{flex-wrap:wrap;gap:15px}.round-arrow{margin-left:auto}
+.about{padding-block:72px}.about-layout{gap:24px}.about-layout>div:last-child{padding:0}
+.about-glow{inset:0 0 30% -30%;opacity:.2;mask-image:linear-gradient(180deg,#0009,transparent 90%)}
+.about-lead{font-size:29px!important}.stat-row{margin-top:32px;gap:24px}.stat-row strong{font-size:36px}
+.repertoire .section-heading>div{max-width:none;text-align:left}.repertoire .section-heading>p{margin-top:22px}
+.genre-cloud{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:30px}
+.genre-cloud span{padding:20px 8px 20px 0;gap:12px;font-size:17px}.genre-cloud span:last-child{grid-column:1/-1}
+.media-panel{min-height:410px;background-position:center,center center}.media-play{transform:translateY(-40px)}
+.media-caption{left:24px;right:24px;bottom:24px;gap:8px}.media-caption strong{font-size:24px;line-height:1.3}.media-caption small{font-size:15px}
+.media-corner{top:22px;right:22px;left:22px;text-align:right}
+.contact{padding-block:72px}.contact-grid{gap:32px}.quote-form{padding:26px}.contact-copy>p{margin-bottom:28px}
+.mobile-budget{position:fixed;z-index:30;left:20px;right:20px;bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:54px;padding:15px 23px;border:1px solid #c9c9c9;border-radius:50px;background:#f1f1f1;color:#080808;font-size:15px;font-weight:700;box-shadow:0 8px 38px #0008;opacity:0;transform:translateY(16px);pointer-events:none;visibility:hidden;transition:opacity .3s ease,transform .3s ease,visibility .3s ease}
+.mobile-budget.is-active{opacity:1;transform:none;pointer-events:auto;visibility:visible}
+html{scroll-padding-bottom:88px}
+}
+@media(max-width:420px){.experience-grid{margin-right:-20px;padding-right:20px}.quote-form{padding:22px}.exp-card{flex-basis:89%;height:340px}}
+
+/* Keep the floating action discreet and card arrows clear of it. */
+.exp-card-bottom{position:static}.exp-card-bottom>div{position:relative;z-index:2}
+.exp-card .round-arrow{position:absolute;z-index:3;top:22px;right:22px;margin:0}
+.exp-index{max-width:calc(100% - 62px);line-height:1.55}
+@media(max-width:900px){.mobile-budget{left:auto;right:16px;width:auto;min-width:154px;min-height:50px;padding:13px 18px;font-size:14px;gap:25px}}
+
+/* One concise musical cue on each experience card. */
+.music-cue{display:inline-flex;align-items:center;gap:8px;margin-bottom:10px;font-family:'Space Grotesk',Arial,sans-serif;font-size:13px;font-weight:600;line-height:1.5;letter-spacing:.035em;color:#e7e7e7}
+.music-bars{display:inline-flex;align-items:center;gap:3px;width:18px;height:16px;flex-shrink:0}
+.music-bars i{display:block;width:3px;height:11px;border-radius:1px;background:currentColor;transform-origin:50% 100%;opacity:.8}
+.music-bars i:nth-child(2){height:16px}.music-bars i:nth-child(3){height:8px}
+@media(prefers-reduced-motion:no-preference){
+.exp-card.is-visible .music-bars i{animation:music-cue-beat .65s ease 2}
+.exp-card.is-visible .music-bars i:nth-child(2){animation-delay:.12s}.exp-card.is-visible .music-bars i:nth-child(3){animation-delay:.22s}
+}
+@keyframes music-cue-beat{0%,100%{transform:scaleY(1)}35%{transform:scaleY(.4)}70%{transform:scaleY(.8)}}
